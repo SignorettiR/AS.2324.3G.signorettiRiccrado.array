@@ -21,6 +21,14 @@ class Program
         Console.WriteLine($"Minimo: {min}");
         Console.WriteLine($"Massimo: {max}");
 
+        Ordina(ref pesi, ref eta, numPersone);
+
+        Console.WriteLine("\nElenco ordinato per età:");
+        for (int i = 0; i < numPersone; i++)
+        {
+            Console.WriteLine($"Eta: {eta[i]}, Peso: {pesi[i]}");
+        }
+        Console.ReadLine();
 
     }
     static void CaricaVettori(ref double[] pesi, ref int[] eta, int numPersone)
@@ -50,6 +58,27 @@ class Program
 
         media /= pesi.Length;
     }
+    static void Ordina(ref double[] pesi, ref int[] eta, int numPersone)
+    {
+        for (int i = 0; i < numPersone - 1; i++)
+        {
+            for (int j = i + 1; j < numPersone; j++)
+            {
+                if (eta[i] > eta[j])
+                {
+
+                    int tempEta = eta[i];
+                    eta[i] = eta[j];
+                    eta[j] = tempEta;
 
 
+                    double tempPeso = pesi[i];
+                    pesi[i] = pesi[j];
+                    pesi[j] = tempPeso;
+                }
+            }
+        }
+
+
+    }
 }
