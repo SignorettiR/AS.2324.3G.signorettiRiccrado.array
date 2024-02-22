@@ -13,6 +13,15 @@ class Program
 
         CaricaVettori(ref pesi, ref eta, numPersone);
 
+        double media, min, max;
+        Statistiche(pesi, out media, out min, out max);
+
+        Console.WriteLine("\nStatistiche dei pesi:");
+        Console.WriteLine($"Media: {media}");
+        Console.WriteLine($"Minimo: {min}");
+        Console.WriteLine($"Massimo: {max}");
+
+
     }
     static void CaricaVettori(ref double[] pesi, ref int[] eta, int numPersone)
     {
@@ -24,5 +33,23 @@ class Program
             eta[i] = rnd.Next(18, 100);
         }
     }
+    static void Statistiche(double[] pesi, out double media, out double min, out double max)
+    {
+        media = 0;
+        min = double.MaxValue;
+        max = double.MinValue;
+
+        foreach (var peso in pesi)
+        {
+            media += peso;
+            if (peso < min)
+                min = peso;
+            if (peso > max)
+                max = peso;
+        }
+
+        media /= pesi.Length;
+    }
+
 
 }
