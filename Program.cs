@@ -1,4 +1,5 @@
-﻿namespace AS._2324._3G.signorettiRiccrado.array;
+﻿using System;
+namespace AS._2324._3G.signorettiRiccrado.array;
 class Program
 {
     static void Main(string[] args)
@@ -22,6 +23,23 @@ class Program
         Console.WriteLine($"Minimo: {min}");
         Console.WriteLine($"Massimo: {max}");
 
+        int[] frequenza;
+        double[] pesiDistinti;
+
+        CalcolaFrequenza(pesi, out frequenza, out pesiDistinti);
+
+        
+        Console.WriteLine("Pesi distinti:");
+        foreach (var peso in pesiDistinti)
+        {
+            Console.WriteLine(peso);
+        }
+
+        Console.WriteLine("Frequenze:");
+        for (int i = 0; i < pesiDistinti.Length; i++)
+        {
+            Console.WriteLine($"{pesiDistinti[i]}: {frequenza[i]}");
+        }
         Ordina(ref pesi, ref eta, numPersone);
 
         Console.WriteLine("\nElenco ordinato per età:");
@@ -83,4 +101,29 @@ class Program
 
 
     }
+    static void CalcolaFrequenza(double[] pesi, out int[] frequenza, out double[] pesidistinti)
+    {
+        Array.Sort(pesi);
+        frequenza = new int[pesi.Length];
+        pesidistinti = new double[pesi.Length];
+
+        int index = 0;
+        pesidistinti[0] = pesi[0];
+        frequenza[0] = 1;
+
+        for (int i = 1; i < pesi.Length; i++)
+        {
+            if (pesi[i] == pesidistinti[index])
+            {
+                frequenza[index]++;
+            }
+            else
+            {
+                index++;
+                pesidistinti[index] = pesi[i];
+                frequenza[index] = 1;
+            }
+        }
+    }
+
 }
